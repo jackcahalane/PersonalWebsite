@@ -93,6 +93,7 @@ body {
   
   #content li {
     margin-bottom: 0.7em;
+    margin: 2px 0;
   }
   
   .post + .post {
