@@ -1,0 +1,121 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Template for building all necessary resources for jackcahalane.com
+Parameters:
+  Bucket_Name:
+    Type: String
+    Description: String that will form part of bucket name for the system
+  Environment:
+    Type: String
+    Description: Determines which environment to provision
+    AllowedValues:
+      - Prod
+      - Dev
+  SSLCert:
+    Type: String
+    Description: SSL cet that CloudFront will use
+
+Resources:
+  S3BucketProvision:
+    Type: AWS::S3::Bucket
+    Properties:
+      Parameters: 
+        Input_File : !Ref Bucket_Name
+        Input_Bucket: !Ref Environment
+  
+  CodePipelinePipelineProvision:
+    Type: AWS::CodePipeline::Pipeline
+    Properties: 
+      ArtifactStore: 
+        ArtifactStore
+      ArtifactStores: 
+        - ArtifactStoreMap
+      DisableInboundStageTransitions: 
+        - StageTransition
+      Name: String
+      RestartExecutionOnUpdate: true
+      RoleArn: String
+      Stages: 
+        - StageDeclaration
+      Tags: 
+        - Key: "Application"
+        Value: "JackCahalane.com"
+        - Key: "Environment"
+        Value: !Ref Environment 
+  
+  CloudFrontDistributionProvision:
+    Type: AWS::CloudFront::Distribution
+    Properties: 
+      DistributionConfig: 
+          Aliases: 
+            - String
+          CacheBehaviors: 
+            - CacheBehavior
+          CNAMEs: 
+            - String
+          Comment: String
+          CustomErrorResponses: 
+            - CustomErrorResponse
+          CustomOrigin: 
+            LegacyCustomOrigin
+          DefaultCacheBehavior: 
+            DefaultCacheBehavior
+          DefaultRootObject: String
+          Enabled: Boolean
+          HttpVersion: String
+          IPV6Enabled: false
+          Logging: 
+            Logging
+          OriginGroups: 
+            OriginGroups
+          Origins: 
+            - Origin
+          PriceClass: String
+          Restrictions: 
+            Restrictions
+          S3Origin: 
+            LegacyS3Origin
+          ViewerCertificate: 
+            ViewerCertificate
+          WebACLId: String
+      Tags: 
+        - Key: "Application"
+        Value: "JackCahalane.com"
+        - Key: "Environment"
+        Value: !Ref Environment
+
+  Route53HostedZone:
+    Type: AWS::Route53::HostedZone
+    Properties: 
+      HostedZoneConfig: 
+        HostedZoneConfig
+      HostedZoneTags: 
+        - HostedZoneTag
+      Name: String
+      QueryLoggingConfig: 
+        QueryLoggingConfig
+      VPCs: 
+        - VPC
+  Route53RecordSet:
+    Type: AWS::Route53::RecordSet
+    Properties: 
+      AliasTarget: 
+        AliasTarget
+      Comment: String
+      Failover: String
+      GeoLocation: 
+        GeoLocation
+      HealthCheckId: String
+      HostedZoneId: String
+      HostedZoneName: String
+      MultiValueAnswer: Boolean
+      Name: String
+      Region: String
+      ResourceRecords: 
+        - String
+      SetIdentifier: String
+      TTL: String
+      Type: String
+      Weight: Integer
+
+    
+
