@@ -41,11 +41,11 @@
     <p>
         For the initial notification, I was using SNS with my email as the target, but that resulted in this garbled message. Duolingo's UI it is not.
         <figure>
-            <img src="https://jackcahalane-blog-bucket.s3.eu-west-1.amazonaws.com/GermanWordaDaySNS.png" alt="SNS Iteration">
+            <img src="https://jackcahalane-blog-bucket.s3.eu-west-1.amazonaws.com/GermanWordaDaySNS.png" alt="SNS Iteration" style="width:358px;height:100px;">
             </figure>
         I then moved to using SES and having some HTML styling in the Lambda function when it prepares the mail. Being able to mask the email that was sending the mail out was also a benefit of switching to SES.
         <figure>
-            <img src="https://jackcahalane-blog-bucket.s3.eu-west-1.amazonaws.com/GermanWordaDaySES.png" alt="SES Iteration">
+            <img src="https://jackcahalane-blog-bucket.s3.eu-west-1.amazonaws.com/GermanWordaDaySES.png" alt="SES Iteration" style="width:358px;height:100px;">
             </figure>
         One to note as well, is that the "Test" fucntion in the Lambda console does not work at all for asynchronous invocations. To test this, it has to be run from the CLI or triggered from EventBridge.
         Knowing this in advance would have saved me an hour of frustration.
