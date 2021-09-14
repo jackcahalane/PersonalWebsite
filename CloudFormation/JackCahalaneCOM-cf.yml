@@ -10,6 +10,9 @@ Parameters:
     AllowedValues:
       - Prod
       - Dev
+  PipelineName:
+    Type: String
+    Description: Input for the pipeline name
   SSLCert:
     Type: String
     Description: SSL cet that CloudFront will use
@@ -26,16 +29,32 @@ Resources:
     Type: AWS::CodePipeline::Pipeline
     Properties: 
       ArtifactStore: 
-        ArtifactStore
-      ArtifactStores: 
-        - ArtifactStoreMap
-      DisableInboundStageTransitions: 
-        - StageTransition
-      Name: String
+        - !Sub arn:aws:s3:::codepipeline-${AWSRegion}-876189075568
+      Name: 
+        - !Sub PipelineName
       RestartExecutionOnUpdate: true
-      RoleArn: String
-      Stages: 
-        - StageDeclaration
+      RoleArn: 
+        - !Sub arn:aws:iam::${AccountId}:role/service-role/AWSCodePipelineServiceRole-${AWSRegion}-JackCahalanePipeline
+      Stages:
+        Stage1: 
+          Actions: 
+              ActionTypeId: 
+                  Category: Source
+                  Owner: String
+                  Provider: String
+                  Version: String
+              Configuration: Json
+              InputArtifacts: 
+                - InputArtifact
+              Name: String
+              Namespace: String
+              OutputArtifacts: 
+                - OutputArtifact
+              Region: !Sub ${AWSRegion}
+              RoleArn: !Sub arn:aws:iam::${AccountId}:role/service-role/AWSCodePipelineServiceRole-${AWSRegion}-JackCahalanePipeline
+              RunOrder: Integer
+          Name: GitHub to S3
+
       Tags: 
         - Key: "Application"
         Value: "JackCahalane.com"
@@ -47,11 +66,10 @@ Resources:
     Properties: 
       DistributionConfig: 
           Aliases: 
-            - String
+            - jackcahalane.com
+            - www.jackcahalane.com
           CacheBehaviors: 
             - CacheBehavior
-          CNAMEs: 
-            - String
           Comment: String
           CustomErrorResponses: 
             - CustomErrorResponse

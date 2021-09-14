@@ -15,14 +15,14 @@ Parameters:
     Description: SSL cet that CloudFront will use
 
 Resources:
-  S3BucketProvision:
+  CodePipelineIAM:
     Type: AWS::S3::Bucket
     Properties:
       Parameters: 
         Input_File : !Ref Bucket_Name
         Input_Bucket: !Ref Environment
   
-  CodePipelinePipelineProvision:
+  CloudFrontIAM:
     Type: AWS::CodePipeline::Pipeline
     Properties: 
       ArtifactStore: 
@@ -42,7 +42,7 @@ Resources:
         - Key: "Environment"
         Value: !Ref Environment 
   
-  CloudFrontDistributionProvision:
+  Route53IAM:
     Type: AWS::CloudFront::Distribution
     Properties: 
       DistributionConfig: 
