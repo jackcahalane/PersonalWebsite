@@ -29,9 +29,33 @@
         <div id="content">
     <h1>Cloud</h1>
     <h2>German Word a Day</h2>
-    <img src="https://jackcahalane-blog-bucket.s3.eu-west-1.amazonaws.com/German+Word+a+Day.svg" alt="Website Architecture">
+    <p>Below is an illustration of the "German Word a Day" application I built to provide me with a bit of a daily prompt to review German vocab. 
+        I was inspired by Emily Shea's similar, and far superior, app for Chinese. Details on this can be found on <a href="https://emshea.com/post/chinese-vocab-app">here</a>. For vocab, I originally used 
+        the csv dictionary from <a href="https://www.dict.cc/">dict.cc</a> but the file I had with 100,000+ translations was a bit unwieldy and also included a lot of slang from Afrikaaners for some reason?
+        I then switched to using the lists from <a href="https://www.sketchengine.eu/german-word-list/">sketchengine.eu</a> as it was a more focused vocab list, albeit quite basic.
+    </p>
+    <figure>
+        <img src="https://jackcahalane-blog-bucket.s3.eu-west-1.amazonaws.com/German+Word+a+Day.svg" alt="Website Architecture">
+        <figcaption>Figure 1: "German Word a Day" application iterations</figcaption>
+        </figure>
+    <p>
+        For the initial notification, I was using SNS with my email as the target, but that resulted in this garbled message. Duolingo's UI it is not.
+        <figure>
+            <img src="https://jackcahalane-blog-bucket.s3.eu-west-1.amazonaws.com/GermanWordaDaySNS.png" alt="SNS Iteration">
+            </figure>
+        I then moved to using SES and having some HTML styling in the Lambda function when it prepares the mail. Being able to mask the email that was sending the mail out was also a benefit of switching to SES.
+        <figure>
+            <img src="https://jackcahalane-blog-bucket.s3.eu-west-1.amazonaws.com/GermanWordaDaySES.png" alt="SES Iteration">
+            </figure>
+        One to note as well, is that the "Test" fucntion in the Lambda console does not work at all for asynchronous invocations. To test this, it has to be run from the CLI or triggered from EventBridge.
+        Knowing this in advance would have saved me an hour of frustration.
+        </p>
+    
     <h2>This Site</h2>
+    <figure>
     <img src="https://jackcahalane-blog-bucket.s3.eu-west-1.amazonaws.com/Jack+Cahalane+com+Architecture.svg" alt="Website Architecture">
+    <figcaption>Figure 2: Architecture for jackcahalane.com</figcaption>
+    </figure>
     <h2>Cloud Certification Resources</h2>
     <p>
         I found the following resources useful when studying for my AWS certifications
